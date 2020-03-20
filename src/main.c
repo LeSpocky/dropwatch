@@ -227,7 +227,7 @@ void set_ack_cb(struct netlink_message *msg,
 	LIST_INSERT_HEAD(&ack_list_head, msg, ack_list_element);
 }
 
-struct netlink_message *wrap_netlink_msg(struct nlmsghdr *buf)
+struct netlink_message *wrap_netlink_msg(unsigned char *buf)
 {
 	struct netlink_message *msg;
 
@@ -294,7 +294,7 @@ struct netlink_message *recv_netlink_message(int *err)
 		}
 	} while (rc == 0);
 
-	msg = wrap_netlink_msg((struct nlmsghdr *)buf);
+	msg = wrap_netlink_msg(buf);
 
 	type = ((struct nlmsghdr *)msg->msg)->nlmsg_type;
 
